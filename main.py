@@ -9,7 +9,7 @@ logging.basicConfig (format = '%(asctime)s - %(levelname)s - %(message)s',level 
 logger = logging.getLogger (__name__)
 
 def start (bot, update):
-	"""REcibe el comando star"""
+	"""Recibe el comando star"""
 
 	bot.send_message (chat_id = update.message.chat_id, text = "argo")
 
