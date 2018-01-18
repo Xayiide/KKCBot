@@ -2,6 +2,8 @@
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import logging
 import utilities as utils
+import msg
+
 
 token = utils.readToken()
 
@@ -9,9 +11,9 @@ logging.basicConfig (format = '%(asctime)s - %(levelname)s - %(message)s',level 
 logger = logging.getLogger (__name__)
 
 def start (bot, update):
-	"""Recibe el comando star"""
+	"""Recibe el comando /start"""
 
-	bot.send_message (chat_id = update.message.chat_id, text = "argo")
+        bot.send_message(chat_id = update.message.chat_id, text = msg.infoStartBot)
 
 
 def unknown (bot, update):
@@ -28,14 +30,11 @@ def error (bot, update, error):
 def main ():
 
 	updater = Updater(token = token)
-
 	dp = updater.dispatcher
-
 	dp.add_handler (CommandHandler ('start', start))
-
 	dp.add_error_handler (error)
+        dp.add_handler (MessageHandler (Filters.command, unknown))
 
-	dp.add_handler (MessageHandler (Filters.command, unknown))
 
 	updater.start_polling()
 	updater.idle()
